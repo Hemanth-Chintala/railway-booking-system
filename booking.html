@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Ticket - Railway Booking System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="dashboard.html" class="logo">🚂 Railway Booking</a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="booking.html">Book Ticket</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="booking-section card">
+            <h1>Book Your Ticket</h1>
+            
+            <form id="bookingForm" class="booking-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="trainSelect">Select Train (Sorted by Travel Time)</label>
+                        <select id="trainSelect" name="trainSelect" required>
+                            <option value="">Choose a train</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="journeyDate">Journey Date</label>
+                        <input type="date" id="journeyDate" name="journeyDate" required>
+                    </div>
+                </div>
+                
+                <div id="trainDetails" class="train-details" style="display: none;">
+                    <h3>Train Details</h3>
+                    <div class="train-info">
+                        <p><strong>Train:</strong> <span id="selectedTrainName"></span></p>
+                        <p><strong>Route:</strong> <span id="selectedRoute"></span></p>
+                        <p><strong>Departure:</strong> <span id="selectedDeparture"></span></p>
+                        <p><strong>Arrival:</strong> <span id="selectedArrival"></span></p>
+                        <p><strong>Duration:</strong> <span id="selectedDuration"></span></p>
+                        <p><strong>Base Fare:</strong> ₹<span id="selectedFare"></span></p>
+                        <p><strong>Extra Charges:</strong> ₹<span id="selectedExtraCharges"></span></p>
+                        <p><strong>Available Seats:</strong> <span id="availableSeats"></span></p>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="passengers">Number of Passengers</label>
+                        <select id="passengers" name="passengers" required>
+                            <option value="">Select passengers</option>
+                            <option value="1">1 Passenger</option>
+                            <option value="2">2 Passengers</option>
+                            <option value="3">3 Passengers</option>
+                            <option value="4">4 Passengers</option>
+                            <option value="5">5 Passengers</option>
+                            <option value="6">6 Passengers</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="seatType">Seat Type</label>
+                        <select id="seatType" name="seatType" required>
+                            <option value="">Select seat type</option>
+                            <option value="sleeper">Sleeper (SL)</option>
+                            <option value="ac3">AC 3 Tier (3A)</option>
+                            <option value="ac2">AC 2 Tier (2A)</option>
+                            <option value="ac1">AC First Class (1A)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="passengerDetails" class="passenger-details" style="display: none;">
+                    <h3>Passenger Details</h3>
+                    <div id="passengerForms">
+                        <!-- Passenger forms will be generated dynamically -->
+                    </div>
+                </div>
+                
+                <div id="bookingSummary" class="booking-summary" style="display: none;">
+                    <h3>Booking Summary</h3>
+                    <div class="summary-details">
+                        <p><strong>Base Amount:</strong> ₹<span id="baseAmount">0</span></p>
+                        <p><strong>Extra Charges:</strong> ₹<span id="extraAmount">0</span></p>
+                        <p><strong>Seat Type Charges:</strong> ₹<span id="seatTypeAmount">0</span></p>
+                        <p><strong>Total Amount:</strong> ₹<span id="totalAmount">0</span></p>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="proceedToPayment" disabled>Proceed to Payment</button>
+                    <button type="button" class="btn btn-secondary" onclick="resetBookingForm()">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

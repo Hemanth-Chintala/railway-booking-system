@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Railway Booking System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="admin.html" class="logo">🚂 Admin Panel</a>
+            <ul class="nav-links" id="adminNavLinks">
+                <li><a href="admin.html">Dashboard</a></li>
+                <li><a href="#" onclick="showSection('trains')">Trains</a></li>
+                <li><a href="#" onclick="showSection('bookings')">Bookings</a></li>
+                <li><a href="#" onclick="showSection('users')">Users</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Admin Dashboard -->
+        <div id="adminDashboard" class="admin-section">
+            <div class="welcome-section">
+                <h1>Admin Dashboard</h1>
+                <p>Manage your railway booking system</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Trains</h3>
+                    <div class="stat-number" id="totalTrains">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Bookings</h3>
+                    <div class="stat-number" id="totalBookings">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Users</h3>
+                    <div class="stat-number" id="totalUsers">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Revenue</h3>
+                    <div class="stat-number">₹<span id="totalRevenue">0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Train Management Section -->
+        <div id="trainsSection" class="admin-section" style="display: none;">
+            <div class="section-header">
+                <h2>Train Management</h2>
+                <button class="btn btn-primary" onclick="showAddTrainModal()">Add New Train</button>
+            </div>
+            
+            <div class="trains-table-container">
+                <table class="admin-table" id="trainsTable">
+                    <thead>
+                        <tr>
+                            <th>Train Name</th>
+                            <th>Number</th>
+                            <th>Route</th>
+                            <th>Departure</th>
+                            <th>Arrival</th>
+                            <th>Duration</th>
+                            <th>Base Fare</th>
+                            <th>Seats</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Train data will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bookings Section -->
+        <div id="bookingsSection" class="admin-section" style="display: none;">
+            <div class="section-header">
+                <h2>All Bookings</h2>
+            </div>
+            
+            <div class="bookings-table-container">
+                <table class="admin-table" id="bookingsTable">
+                    <thead>
+                        <tr>
+                            <th>PNR</th>
+                            <th>User</th>
+                            <th>Train</th>
+                            <th>Date</th>
+                            <th>Passengers</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Booking data will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Users Section -->
+        <div id="usersSection" class="admin-section" style="display: none;">
+            <div class="section-header">
+                <h2>User Management</h2>
+            </div>
+            
+            <div class="users-table-container">
+                <table class="admin-table" id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- User data will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Train Modal -->
+    <div id="trainModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="trainModalTitle">Add New Train</h2>
+                <span class="close" onclick="closeTrainModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="trainForm">
+                    <input type="hidden" id="trainId">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="trainName">Train Name</label>
+                            <input type="text" id="trainName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="trainNumber">Train Number</label>
+                            <input type="text" id="trainNumber" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="trainSource">Source</label>
+                            <input type="text" id="trainSource" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="trainDestination">Destination</label>
+                            <input type="text" id="trainDestination" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="departureTime">Departure Time</label>
+                            <input type="time" id="departureTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="arrivalTime">Arrival Time</label>
+                            <input type="time" id="arrivalTime" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="baseFare">Base Fare (₹)</label>
+                            <input type="number" id="baseFare" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="extraCharges">Extra Charges (₹)</label>
+                            <input type="number" id="extraCharges" min="0" value="0">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="totalSeats">Total Seats</label>
+                            <input type="number" id="totalSeats" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="travelDuration">Travel Duration (hours)</label>
+                            <input type="number" id="travelDuration" min="0.5" step="0.5" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeTrainModal()">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveTrain()">Save Train</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

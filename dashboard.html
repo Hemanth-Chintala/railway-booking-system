@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Railway Booking System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="dashboard.html" class="logo">🚂 Railway Booking</a>
+            <ul class="nav-links" id="userNavLinks">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="booking.html">Book Ticket</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="welcome-section">
+            <h1>Welcome to Railway Dashboard</h1>
+            <p id="welcomeMessage">Welcome back!</p>
+            <button id="getLocationBtn" class="btn btn-primary" onclick="getCurrentLocation()">Get My Location</button>
+            <p id="locationStatus"></p>
+        </div>
+
+        <div class="search-section card">
+            <h2>Search Trains</h2>
+            <div class="search-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="searchSource">From</label>
+                        <select id="searchSource">
+                            <option value="">Select Source</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="searchDestination">To</label>
+                        <select id="searchDestination">
+                            <option value="">Select Destination</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" onclick="searchTrains()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="trains-section card">
+            <h2>Available Trains</h2>
+            <div id="trainsList" class="trains-grid">
+                <!-- Trains will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
